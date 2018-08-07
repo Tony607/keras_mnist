@@ -64,7 +64,7 @@ run_py: compile
 	python3 ${RUN_SCRIPT}
 
 .PHONY: run_cam
-run_py: compile
+run_cam: compile
 	python3 ${RUN_CAM_SCRIPT}
 
 .PHONY: train
