@@ -1,9 +1,15 @@
 # Intel® Movidius™ NCS MNIST example for NCSDK2
 
-## Run MNIST classification model trained with Keras
+## Train a model with Keras and run on NCS
 
+## Requirements
+* NCSDK2 installed to compile model and use its Python API.
+* Keras installed for training the model. 
+```
+pip3 install keras
+```
 ## Quick start
-
+* Optionally, copy this folder into your NCSDK2 directory along with other TensorFlow examples. `ncsdk/examples/tensorflow/keras_mnist`
 * Plug NCS to a USB port on the host machine.
 * Run command - `make all`
 * Run command - `make run`
@@ -25,6 +31,9 @@ Uses the network description and the trained weights files to generate a Movidiu
 
 ### make run
 Runs the provided predict-mnist-ncsdk2.py file which sends a single image to the Neural Compute Stick and receives and displays the inference results.
+
+### make run_cam
+Runs the provided predict-mnist-ncsdk2-cam.py file which is similar to previous demo but take live webcam image as input.
 
 ### make check
 Runs the network on Caffe on CPU and runs the network on the Neural Compute Stick.  Check then compares the two results to make sure they are consistent with each other.

@@ -11,6 +11,7 @@ TF_MODEL_FOLDER = TF_Model/
 MODEL_FILENAME = TF_Model/tf_model.meta
 CONV_SCRIPT = ./convert-mnist.py
 RUN_SCRIPT = ./predict-mnist-ncsdk2.py
+RUN_CAM_SCRIPT = ./predict-mnist-ncsdk2-cam.py
 TRAIN_SCRIPT = ./train-minst.py
 INPUT_NODE_FLAG = -in=conv2d_1_input
 OUTPUT_NODE_FLAG = -on=dense_2/Softmax
@@ -61,6 +62,10 @@ run: compile
 .PHONY: run_py
 run_py: compile
 	python3 ${RUN_SCRIPT}
+
+.PHONY: run_cam
+run_py: compile
+	python3 ${RUN_CAM_SCRIPT}
 
 .PHONY: train
 train:
