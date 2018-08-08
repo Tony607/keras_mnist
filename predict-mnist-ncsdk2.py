@@ -2,26 +2,13 @@
 
 # [NCSDK2 API](https://movidius.github.io/ncsdk/ncapi/ncapi2/py_api/readme.html)
 from mvnc import mvncapi as mvnc
-# import mnist    # pip3 install mnist
-from keras.datasets import mnist
 import numpy
-
-# Load MNIST data from Keras
-(x_train, y_train), (x_test, y_test) = mnist.load_data()
-
-# Load MNSIT data from mnist python package
-# x_train = mnist.train_images()
-# y_train = mnist.train_labels()
-
-# x_test = mnist.test_images()
-# y_test = mnist.test_labels()
-
-
-# Prepare test image
-test_idx = numpy.random.randint(0, 10000)
-test_image = x_test[test_idx]
-test_image = test_image.astype('float32') / 255.0
-
+import cv2
+from ImageProcessor import ImageProcessor
+processor = ImageProcessor()
+test_image = './data/photo_6.jpg'
+input_image = cv2.imread(test_image)
+cropped_input, cropped = processor.preprocess_image(input_image)
 # Using NCS Predict
 # set the logging level for the NC API
 # mvnc.global_set_option(mvnc.GlobalOption.RW_LOG_LEVEL, 0)
@@ -52,7 +39,7 @@ graph = mvnc.Graph('graph1')
 in_fifo, out_fifo = graph.allocate_with_fifos(dev, graphFileBuff)
 
 # Write the input to the input_fifo buffer and queue an inference in one call
-graph.queue_inference_with_fifo_elem(in_fifo, out_fifo, test_image, 'user object')
+graph.queue_inference_with_fifo_elem(in_fifo, out_fifo, cropped_input.astype('float32'), 'user object')
 
 # Read the result to the output Fifo
 output, userobj = out_fifo.read_elem()
@@ -69,4 +56,3 @@ except:
     quit()
 
 print("NCS \r\n", output, '\r\nPredicted:',output.argmax())
-print("Correct:", y_test[test_idx])
