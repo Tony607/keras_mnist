@@ -1,6 +1,5 @@
 # Intel® Movidius™ NCS MNIST example for NCSDK2
-
-## Train a model with Keras and run on NCS
+## Tutorial - [How to run Keras model on Movidius neural compute stick](https://www.dlology.com/blog/how-to-run-keras-model-on-movidius-neural-compute-stick/)
 
 ## Requirements
 * NCSDK2 installed to compile model and use its Python API.

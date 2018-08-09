@@ -41,4 +41,4 @@ with open("model.json", "w") as file:
 model.save_weights("weights.h5")
 
 # Save model and weights to the same file.
-model.save('model.h5')
+model.save('model.h5', include_optimizer=False)
